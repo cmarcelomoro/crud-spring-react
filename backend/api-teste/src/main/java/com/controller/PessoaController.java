@@ -15,6 +15,7 @@ import com.model.Pessoa;
 import com.repository.PessoaRepository;
 
 @Controller
+
 @RequestMapping("/pessoa")
 public class PessoaController {
     @Autowired

@@ -9,19 +9,26 @@ import jakarta.persistence.Id;
 @Entity
 public class Pessoa {
    @Id
-   @GeneratedValue(strategy=GenerationType.AUTO)
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
    private Integer id; 
-   @Column
+   @Column(nullable=false)
    private String nome;
-   @Column
+   @Column(nullable=false, unique=true)
    private String email;
+   public Pessoa() {
+   }
+   
+   public Pessoa(Integer id,String nome, String email) {
+      this.nome = nome;
+      this.id = id;
+      this.email = email;
+   }
 
 
    public Pessoa(String nome, String email) {
       this.nome = nome;
       this.email = email;
    }
-
 
    public Integer getId() {
       return id;

@@ -7,8 +7,6 @@ import com.model.Pessoa;
 
 @Repository
 public interface PessoaRepository extends CrudRepository<Pessoa, Integer> {
-    
-
-
+ 
 
 }
