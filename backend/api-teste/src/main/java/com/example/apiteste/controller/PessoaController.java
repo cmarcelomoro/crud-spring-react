@@ -34,8 +34,8 @@ public class PessoaController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping(path="/remover/{nome}")
-    public ResponseEntity<Map<String, Object>> removerPessoa(@PathVariable String nome){
+    @DeleteMapping(path="/remover")
+    public ResponseEntity<Map<String, Object>> removerPessoa(@RequestParam String nome){
         Optional<Pessoa> pessoaOptional = pessoaRepository.findByNome(nome);
         if (!pessoaOptional.isPresent()) {
             Map<String, Object> response = new HashMap<>();

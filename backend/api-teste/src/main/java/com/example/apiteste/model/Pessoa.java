@@ -36,6 +36,8 @@ public class Pessoa {
       this.email = email;
    }
 
+   public Pessoa(){}
+
    public Integer getId() {
       return id;
    }
