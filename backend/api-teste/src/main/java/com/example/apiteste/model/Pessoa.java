@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Pessoa {
+
    @Id
    @GeneratedValue(strategy=GenerationType.IDENTITY)
    private Integer id; 
@@ -15,7 +16,10 @@ public class Pessoa {
    private String nome;
    @Column(nullable=false, unique=true)
    private String email;
-   public Pessoa() {
+
+   public Pessoa(PessoaRequestDTO data) {
+      this.nome = data.nome();
+      this.email = data.email();
    }
    
    public Pessoa(Integer id,String nome, String email) {
