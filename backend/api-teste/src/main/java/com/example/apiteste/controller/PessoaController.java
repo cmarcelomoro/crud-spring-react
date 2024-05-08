@@ -2,6 +2,7 @@ package com.example.apiteste.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.example.apiteste.model.PessoaRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,25 @@ public class PessoaController {
         response.put("message", "Pessoa cadastrada com sucesso!");
         response.put("pessoa", pessoaData);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping(path="/remover/{id}")
+    public ResponseEntity<Map<String, Object>> removerPessoa(@PathVariable Long id){
+        Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
+        if (!pessoaOptional.isPresent()) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Pessoa não encontrada para o ID fornecido");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        Pessoa pessoa = pessoaOptional.get();
+        pessoaRepository.delete(pessoa);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Pessoa removida com sucesso!");
+        response.put("pessoa", pessoa);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
 }
