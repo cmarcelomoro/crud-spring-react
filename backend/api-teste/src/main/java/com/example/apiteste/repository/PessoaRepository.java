@@ -10,4 +10,6 @@ public interface PessoaRepository extends CrudRepository<Pessoa, Integer> {
 
 
     Optional<Pessoa> findById(Long id);
+
+    Optional<Pessoa> findByNome(String nome);
 }

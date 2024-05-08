@@ -17,11 +17,7 @@ public class Pessoa {
    @Column(nullable=false, unique=true)
    private String email;
 
-   public Pessoa(PessoaRequestDTO data) {
-      this.nome = data.nome();
-      this.email = data.email();
-   }
-   
+
    public Pessoa(Integer id,String nome, String email) {
       this.nome = nome;
       this.id = id;
@@ -32,6 +28,7 @@ public class Pessoa {
       this.nome = data.nome();
       this.email = data.email();
    }
+
 
 
    public Pessoa(String nome, String email) {

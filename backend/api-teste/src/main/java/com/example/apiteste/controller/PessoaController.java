@@ -34,12 +34,12 @@ public class PessoaController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping(path="/remover/{id}")
-    public ResponseEntity<Map<String, Object>> removerPessoa(@PathVariable Long id){
-        Optional<Pessoa> pessoaOptional = pessoaRepository.findById(id);
+    @DeleteMapping(path="/remover/{nome}")
+    public ResponseEntity<Map<String, Object>> removerPessoa(@PathVariable String nome){
+        Optional<Pessoa> pessoaOptional = pessoaRepository.findByNome(nome);
         if (!pessoaOptional.isPresent()) {
             Map<String, Object> response = new HashMap<>();
-            response.put("message", "Pessoa não encontrada para o ID fornecido");
+            response.put("message", "Pessoa não encontrada para o nome fornecido");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
 
@@ -51,5 +51,4 @@ public class PessoaController {
         response.put("pessoa", pessoa);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
 }
