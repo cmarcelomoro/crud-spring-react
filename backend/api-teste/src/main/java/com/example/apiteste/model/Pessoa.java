@@ -28,6 +28,11 @@ public class Pessoa {
       this.email = email;
    }
 
+   public Pessoa (PessoaRequestDTO data){
+      this.nome = data.nome();
+      this.email = data.email();
+   }
+
 
    public Pessoa(String nome, String email) {
       this.nome = nome;
