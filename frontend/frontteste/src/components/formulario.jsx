@@ -12,17 +12,18 @@ function Formulario(){
         const data = {
             nome: nome,
             email: email
+        
           };
           
         try{
-            const response = await axios.post('http://localhost:8080/pessoa/cadastrar',{nome,email});
+            console.log(data);
+            const response = await axios.post('http://localhost:8080/pessoa/cadastrar',data);
             console.log('Resposta da API', response.data);
         }catch(error){
             console.error('KKKKKKKKKKKKKKKKK:',error);
         }
 
-        console.log('nome: ',nome);
-        console.log('email: ',email);
+       
 
         setNome('');
         setEmail('');
