@@ -16,6 +16,7 @@ import com.example.apiteste.repository.PessoaRepository;
 
 
 @Controller
+
 @RequestMapping("/pessoa")
 public class PessoaController {
     @Autowired
@@ -31,6 +32,7 @@ public class PessoaController {
         response.put("pessoa", pessoaData);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping(path="/remover/{id}")
     public ResponseEntity<Map<String, Object>> removerPessoa(@PathVariable Long id){
