@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.apiteste.model.Pessoa;
 import com.example.apiteste.repository.PessoaRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 @Controller
 
 @RequestMapping("/pessoa")
@@ -21,6 +25,7 @@ public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path="/cadastrar")
     public ResponseEntity<Map<String, Object>> cadastrarPessoa(@RequestParam String nome, @RequestParam String email){
         Pessoa pessoa = new Pessoa(nome,email);
@@ -30,4 +35,5 @@ public class PessoaController {
         response.put("pessoa", pessoa);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    
 }
