@@ -11,9 +11,9 @@ public class PessoaService {
 
     private PessoaRepository pessoaRepository;
 
-    public Pessoa buscarPessoa(Long id) {
+    public Pessoa buscarPessoa(Integer id) {
 
-        Pessoa pessoa = pessoaRepository.findById(Math.toIntExact(id)).orElse(null);
+        Pessoa pessoa = pessoaRepository.findById(id).orElse(null);
 
         return pessoa;
     }

@@ -24,6 +24,7 @@ public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
     private PessoaService pessoaService;
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -65,12 +66,12 @@ public class PessoaController {
         response.put("pessoas", pessoas);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @PutMapping(path="/update/{id}")
     public ResponseEntity<Map<String, Object>> atualizarPessoas(@PathVariable Long id, @RequestBody PessoaRequestDTO data) {
-      Pessoa pessoa = pessoaService.buscarPessoa(id);
-      Pessoa novaPessoa2 = new Pessoa(data.nome(), data.email());
-      Pessoa novaPessoa = pessoaService.atualizarPessoa(id,novaPessoa2);
+      Pessoa pessoa = pessoaService.buscarPessoa(Math.toIntExact(id));
+      Pessoa novaPessoa = new Pessoa(data.nome(), data.email());
+      pessoaService.atualizarPessoa(id,novaPessoa);
       pessoaService.atualizarPessoa(id,pessoa);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Pessoa atualizada com sucesso!");
