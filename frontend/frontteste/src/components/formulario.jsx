@@ -30,7 +30,7 @@ function Formulario(){
     };
 
     return(
-        <form method='post' className="form container is-primary is-one-quarter mt-6" onSubmit={handleSubmit}>
+        <form method='post' className="form container is-primary is-one-quarter" onSubmit={handleSubmit}>
             <div className="field m-4">
                 <div className="control">
                 <label> Nome: </label>

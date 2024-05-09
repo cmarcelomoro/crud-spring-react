@@ -3,6 +3,7 @@ package com.example.apiteste.controller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.List;
 
 import com.example.apiteste.model.PessoaRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,16 @@ import com.example.apiteste.model.Pessoa;
 import com.example.apiteste.repository.PessoaRepository;
 
 
+
 @Controller
 
 @RequestMapping("/pessoa")
 public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private PessoaService pessoaService;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(path="/cadastrar")
@@ -51,4 +56,28 @@ public class PessoaController {
         response.put("pessoa", pessoa);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/listar")
+    public ResponseEntity<Map<String, Object>> listarPessoas() {
+        List<Pessoa> pessoas = (List<Pessoa>) pessoaRepository.findAll();
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Lista de pessoas encontrada com sucesso!");
+        response.put("pessoas", pessoas);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    //@CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping(path="/update/{id}")
+    public ResponseEntity<Map<String, Object>> atualizarPessoas(@PathVariable Long id, @RequestBody PessoaRequestDTO data) {
+      Pessoa pessoa = pessoaService.buscarPessoa(Math.toIntExact(id));
+      Pessoa novaPessoa = new Pessoa(data.nome(), data.email());
+      pessoaService.atualizarPessoa(id,novaPessoa);
+      pessoaService.atualizarPessoa(id,pessoa);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Pessoa atualizada com sucesso!");
+        response.put("pessoa", pessoa);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

@@ -30,13 +30,15 @@ public class Pessoa {
    }
 
 
-
    public Pessoa(String nome, String email) {
       this.nome = nome;
       this.email = email;
    }
 
    public Pessoa(){}
+
+
+
 
    public Integer getId() {
       return id;
