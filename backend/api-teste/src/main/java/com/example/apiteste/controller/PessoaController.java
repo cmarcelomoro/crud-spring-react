@@ -3,6 +3,7 @@ package com.example.apiteste.controller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.List;
 
 import com.example.apiteste.model.PessoaRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,4 +52,15 @@ public class PessoaController {
         response.put("pessoa", pessoa);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/listar")
+    public ResponseEntity<Map<String, Object>> listarPessoas() {
+        List<Pessoa> pessoas = (List<Pessoa>) pessoaRepository.findAll();
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Lista de pessoas encontrada com sucesso!");
+        response.put("pessoas", pessoas);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }
